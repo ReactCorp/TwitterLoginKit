@@ -64,7 +64,11 @@ public class TwitterLoginKit: NSObject {
 
 public extension TwitterLoginKit {
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        guard let mobileSSO = mobileSSO, let sourceApplication = options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String else {return false}
+        var sourceApplication = ""
+        if (options[UIApplication.OpenURLOptionsKey.sourceApplication] != nil) {
+            sourceApplication = options[UIApplication.OpenURLOptionsKey.sourceApplication] as! String
+        }
+        guard let mobileSSO = mobileSSO else {return false}
         switch mobileSSO.typeOf(sourceApplication: sourceApplication) {
         case .sso:
             return mobileSSO.process(redirectURL: url)
