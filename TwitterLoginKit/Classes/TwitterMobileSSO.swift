@@ -8,7 +8,7 @@
 import UIKit
 
 enum SourceApplicationType {
-    case sso, web, invalid
+    case sso, web
 }
 
 class TwitterMobileSSO: NSObject {
@@ -36,7 +36,7 @@ class TwitterMobileSSO: NSObject {
         } else if let bundleId = Bundle.main.bundleIdentifier, sourceApplication.contains("com.apple") || sourceApplication.contains(bundleId) {
             return .web
         } else {
-            return .invalid
+            return .sso
         }
     }
 
